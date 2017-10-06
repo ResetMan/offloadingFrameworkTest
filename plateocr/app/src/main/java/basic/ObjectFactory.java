@@ -173,6 +173,8 @@ public class ObjectFactory {
 	 * @param proxy
 	 *            迁移对象的代理
 	 * @return 返回对象代理
+	 *
+	 * 请求参数有handlerType, objectID, fieldVars, copy
 	 */
 	public static Object offloadToRemote(String dest, Object proxy) {
 		// 说明对象在本地
