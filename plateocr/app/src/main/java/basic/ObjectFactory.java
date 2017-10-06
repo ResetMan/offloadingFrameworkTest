@@ -34,7 +34,7 @@ public class ObjectFactory {
 	 *            创建对象的构造参数
 	 * @return 对象代理
 	 */
-	public static Object Create(String loc, Class<?> clazz, Object... params) {
+	public static Object create(String loc, Class<?> clazz, Object... params) {
 		Object localProxy = null;
 		if (loc.equals(Utils.selfIP)) { // 如果创建位置与本地IP一致
 			// 本地创建
@@ -56,6 +56,9 @@ public class ObjectFactory {
 	 * @param params
 	 *            创建对象的构造参数
 	 * @return 对象代理
+	 *
+	 * 请求参数有handlerType, clazz, srcIP, (sendParams)
+	 * 响应参数有objectID, copy
 	 */
 	private static Object remoteCreate(String loc, Class<?> clazz, Object[] params) {
 		// TODO Auto-generated method stub
@@ -65,6 +68,7 @@ public class ObjectFactory {
 			Map remoteCreateMap = new HashMap();
 			remoteCreateMap.put("handlerType", "RemoteCreateHandler");// 开启远程创建
 			remoteCreateMap.put("clazz", clazz); // 存入创建的类型
+			remoteCreateMap.put("srcIP", Utils.selfIP); // 存入发起者IP 即MobileIP
 			// 处理创建的构造参数
 			int paramLength = params.length;
 			if (paramLength == 0) {
@@ -79,7 +83,7 @@ public class ObjectFactory {
 					}
 				}
 				remoteCreateMap.put("sendParams", sendParams); // 存入构造参数
-				remoteCreateMap.put("srcIP", Utils.selfIP); // 存入发起者IP 即MobileIP
+
 			}
 
 			Request remoteCreate = new Request(temp, remoteCreateMap);// 开启远程创建请求
