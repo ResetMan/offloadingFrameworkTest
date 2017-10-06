@@ -21,6 +21,10 @@ public class RemoteCreateHandler extends Handler implements Handleable {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * remoteCreate创建的结果是copy和objectID
+	 * @return
+     */
 	@Override
 	public Map handle() {
 		// TODO Auto-generated method stub
