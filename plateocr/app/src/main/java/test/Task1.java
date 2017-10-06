@@ -2,11 +2,13 @@ package test;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+
 /**
  * Created by admin on 2017/9/29.
  */
 
-public class Task1 implements Task1Intf {
+public class Task1 implements Task1Intf , Serializable{
 
 
     @Override

@@ -1,10 +1,12 @@
 package test;
 
+import java.io.Serializable;
+
 /**
  * Created by admin on 2017/9/29.
  */
 
-public class Task2 implements Task2Intf {
+public class Task2 implements Task2Intf ,Serializable{
 
     @Override
     public byte[][] task2(byte[] curbitmapbs) {
