@@ -295,6 +295,8 @@ public class ObjectFactory {
 	 * @param proxy
 	 *            迁回对象的代理
 	 * @return 代理对象
+	 * offloadFromRemote即将对象从远程迁回本地
+	 * 请求参数handlerType,objectID,srcIP
 	 */
 	public static Object offloadFromRemote(Object proxy) {
 		String objectID = PROXY_ID_MAP.get(proxy); // 迁回对象ID

@@ -18,6 +18,14 @@ public class OffloadFromRemoteHandler extends Handler implements Handleable {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * offloadFromRemoteHandler过程：
+	 * 1、获取objectID以及srcIP
+	 * 2、通过objectID获取proxy以及loc
+	 * 3、判断loc是否是自身IP，如果是则通过offloadToRemote方法将对象返回给请求srcIP;如果不是则继续
+	 * offloadFromRemote然后offloadToRemote
+	 * @return
+     */
 	@Override
 	public Map handle() {
 		// TODO Auto-generated method stub
