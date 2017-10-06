@@ -235,6 +235,10 @@ public class ObjectFactory {
 	 *            转发迁移的对象ID
 	 * @param localObject
 	 *            转发迁移的对象副本
+	 *
+	 * 装发迁移的概念:比如Mobile的对象A在Edge1上，这个时候Mobile与Edge1的连接出现问题，则将Mobile上的信息发
+	 * 送给Cloud或者其他Edge，作为跳板将Mobile与Edge1连接起来
+	 * 请求参数 handlerType, objectID, fieldVars, copy, Loc
 	 */
 	public static void transmitToRemote(String dest, String objectID, Object localObject) {
 		// 说明对象在本地
