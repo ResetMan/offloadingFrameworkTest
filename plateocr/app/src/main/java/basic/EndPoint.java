@@ -18,6 +18,18 @@ public class EndPoint implements InvocationHandler {
 		this.objectID = objectID;
 	}
 
+	/**
+	 *
+	 * @param proxy
+	 * @param method
+	 * @param args
+	 * @return
+     * @throws Throwable
+	 * 远程调用情况分为以下三种：
+	 * 1.能够直接连上Loc 开始remoteInvoke {handlerType, methodName, params}
+	 * 2.不能够直接连上Loc,但是有SupLoc（后备跳板） 开始remoteInvoke {handlerType, methodName, params}
+	 * 3.后备跳板都没后，开始transmitInvoke{handlerType, objectID, Loc, methodName, params}
+     */
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		// TODO Auto-generated method stub
@@ -34,6 +46,7 @@ public class EndPoint implements InvocationHandler {
 			if ((temp = Utils.getSocket(Loc)).isConnected()) { // 如果可以连接到Loc
 				Map remoteInvokeMap = new HashMap();
 				remoteInvokeMap.put("handlerType", "RemoteInvokeHandler"); // 开启远程调用请求
+				remoteInvokeMap.put("objectID", objectID);//存入objectID
 				remoteInvokeMap.put("methodName", method.getName()); // 存入方法名
 				if (args != null) { // 如果方法调用参数非空
 					int length = args.length;
@@ -68,6 +81,7 @@ public class EndPoint implements InvocationHandler {
 					temp = Utils.getSocket(supLoc);// 连接到后备节点
 					Map remoteInvokeMap = new HashMap();
 					remoteInvokeMap.put("handlerType", "RemoteInvokeHandler");// 开启远程调用请求
+					remoteInvokeMap.put("objectID", objectID);//存入objectID
 					remoteInvokeMap.put("methodName", method.getName());// 存入方法名
 					if (args != null) {
 						int length = args.length;
