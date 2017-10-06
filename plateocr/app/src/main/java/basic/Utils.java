@@ -88,6 +88,9 @@ public class Utils {
 		parseNodeXML();
 		Thread st = new Thread(new Server());
 		st.start();
+		System.out.println("frameworkInit: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println("selfIP: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ selfIP);
+		System.out.println("selfPort: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + selfPort);
 	}
 
 	/**

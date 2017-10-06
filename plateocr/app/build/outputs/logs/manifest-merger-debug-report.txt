@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:2:1-28:12
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:2:1-43:12
 	package
 		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:3:5-43
 		INJECTED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml
@@ -24,41 +24,59 @@ ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:7:5-43
 		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:7:15-40
 		INJECTED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml
 		INJECTED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml
-uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:9:5-76
-	android:name
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:9:22-73
-uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:10:5-76
-	android:name
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:10:22-73
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:11:5-75
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:10:5-75
 	android:name
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:11:22-72
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:10:22-72
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:12:5-81
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:11:5-81
 	android:name
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:12:22-78
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:11:22-78
+uses-permission#android.permission.INTERNET
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:13:5-67
+	android:name
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:13:22-64
+uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:15:5-84
+	android:name
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:15:22-81
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:17:5-18:23
+	android:name
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:17:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:19:5-92
+	android:name
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:19:22-73
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:20:5-92
+	android:name
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:20:22-73
+uses-permission#android.permission.WAKE_LOCK
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:21:5-84
+	android:name
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:21:22-65
 application
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:14:5-26:19
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:28:5-41:19
 	android:label
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:16:9-41
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:30:9-41
 	android:icon
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:15:9-45
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:29:9-45
+	android:name
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:31:9-39
 activity#test.PlateocrActivity
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:17:9-25:20
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:32:9-40:20
 	android:label
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:18:13-45
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:33:13-45
 	android:name
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:19:13-49
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:34:13-49
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:20:13-24:29
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:35:13-39:29
 action#android.intent.action.MAIN
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:21:17-69
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:36:17-69
 	android:name
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:21:25-66
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:36:25-66
 category#android.intent.category.LAUNCHER
-ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:23:17-77
+ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:38:17-77
 	android:name
-		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:23:27-74
+		ADDED from F:\Expr\plateocr\app\src\main\AndroidManifest.xml:38:27-74
