@@ -21,6 +21,10 @@ public class OffloadToRemoteHandler extends Handler implements Handleable {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * offloadToRemote结果offloadState
+	 * @return
+     */
 	@Override
 	public Map handle() {
 		// TODO Auto-generated method stub
