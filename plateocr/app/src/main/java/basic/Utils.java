@@ -1,9 +1,19 @@
 package basic;
 
+import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -37,10 +47,72 @@ public class Utils {
 	 * @return 节点IP
 	 */
 	public static String getSelfIP() {
-		selfIP = "";
+		selfIP = getAndroidIP();
 		return selfIP;
 	}
 
+	/**
+	 * getAndroidIP 获取androidIP
+	 * @return
+     */
+	public static String getAndroidIP() {
+		String ip = "";
+		WifiManager wifiManager = (WifiManager) Framework.getContext().getSystemService(Context.WIFI_SERVICE);
+		if(!wifiManager.isWifiEnabled()) {
+			wifiManager.setWifiEnabled(true);
+		} else {
+			WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+			int ipAddress = wifiInfo.getIpAddress();
+			ip = intToIp(ipAddress);
+		}
+		return ip;
+	}
+
+	/**
+	 *
+	 * @param i  ipAddress
+	 * @return  ip
+     */
+	public static String intToIp(int i) {
+		return (i & 0xFF) + "." +
+				((i >> 8) & 0xFF) + "." +
+				((i >> 16) & 0xFF) + "." +
+				((i >> 24) & 0xFF);
+	}
+
+	/**
+	 * frameworkInit 初始化selfIP  获取当前路由信息  打开Server进程
+	 */
+	public static void frameworkInit() {
+		getSelfIP();
+		parseNodeXML();
+		Thread st = new Thread(new Server());
+		st.start();
+	}
+
+	/**
+	 * parseNodeXML 处理NodeXML文件
+	 */
+	public static void parseNodeXML() {
+		try {
+			SAXReader saxReader = new SAXReader();
+			InputStream in = Framework.getContext().getResources().getAssets().open("node.xml");
+			Document document = saxReader.read(in);
+			Element root = document.getRootElement();
+			for(Iterator nit = root.elementIterator("Node");nit.hasNext();) {
+				Element node = (Element) nit.next();
+				String nodeIP = node.elementText("NodeIP");
+				int nodePort = Integer.parseInt(node.elementText("NodePort"));
+				if(nodeIP.equals(selfIP)) {
+					selfPort = nodePort;
+				}
+				Nodes.put(nodeIP, nodePort);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 	/**
 	 * 
 	 * @param clazz
