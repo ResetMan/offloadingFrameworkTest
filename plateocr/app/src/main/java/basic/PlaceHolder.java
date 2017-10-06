@@ -1,12 +1,14 @@
 package basic;
 
+import java.io.Serializable;
+
 /**
  * PlaceHolder 代理对象传输的一个中间产物
  * 
  * @author csh
  *
  */
-public class PlaceHolder {
+public class PlaceHolder implements Serializable{
 
 	private Object copy; // 对象副本
 	private String ID; // 对象ID
