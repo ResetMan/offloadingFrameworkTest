@@ -21,6 +21,10 @@ public class TransmitToRemoteHandler extends Handler implements Handleable {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * transmitToRemoteHandler返回的结果是transmitState
+	 * @return
+     */
 	@Override
 	public Map handle() {
 		// TODO Auto-generated method stub
