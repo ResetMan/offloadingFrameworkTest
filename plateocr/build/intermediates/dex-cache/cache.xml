@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="F:\Experience\plateocr\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="df3da14e6f101c567060861f0e64f2e5f359cf51">
+        <dex dex="F:\Experience\plateocr\app\build\intermediates\pre-dexed\debug\instant-run_5c8582cf3d566da51e64ee43233dac75342279f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\Experience\plateocr\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="1ad37a309a86fc922bb88041c120e029432edb3a">
+        <dex dex="F:\Experience\plateocr\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_c455261c502aaaf514c4120c25e2331cb62f69bd.jar" />
+    </item>
+
+</items>
