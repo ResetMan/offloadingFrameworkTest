@@ -7,13 +7,15 @@ import android.util.Log;
 
 import java.io.InputStream;
 
+import basic.Framework;
+
 /**
  * @程序员 蒲小东
  * @功能 读取资源
  */
 public class AssetsResource {
 
-	public static Context context = null;
+	public static Context context = Framework.getContext();
 	
 	public static Bitmap getBitmap(String fileName) {
 		 
