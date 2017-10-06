@@ -19,5 +19,23 @@
         sha1="1ad37a309a86fc922bb88041c120e029432edb3a">
         <dex dex="F:\Experience\plateocr\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_c455261c502aaaf514c4120c25e2331cb62f69bd.jar" />
     </item>
+    <item
+        is-multidex="false"
+        jar="F:\Expr\plateocr\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="05e19f8671b84e82ca0da11a46b92afea296c307">
+        <dex dex="F:\Expr\plateocr\app\build\intermediates\pre-dexed\debug\instant-run_b8fe3d2b8969fd42c3a4ab4d9d42154af7de7cd2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\Expr\plateocr\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8747b8a7e81a7cc23384b9f790dcdb14d7b59014">
+        <dex dex="F:\Expr\plateocr\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_59567547a70c5a3d19b802e8201d2c3f4c916e0c.jar" />
+    </item>
 
 </items>
