@@ -71,6 +71,7 @@ public class CheckPlate {
 			
 			int hingPlateXState = PlateNumberGroup.PlateXState[PlateNumberGroup.PlateXState.length - 1]; 
 			if ((hingPlateXState > 6) && ( hingPlateXState <= 12)) PlateNumberGroup.AlreadyChecked = true;
+			//PlateNumberGroup.AlreadyChecked = true;
 		}
 		
 		return bitmap;
