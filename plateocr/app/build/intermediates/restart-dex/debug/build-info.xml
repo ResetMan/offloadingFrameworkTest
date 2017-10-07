@@ -5,9 +5,9 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="506257730121932"
+    timestamp="590168328362078"
     token="-9219496441711014878"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
@@ -23,15 +23,29 @@
         duration="0" />
 
     <artifact
-        location="F:\Expr\plateocr\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
+        location="F:\Expr\plateocr\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
+        type="RESOURCES" />
 
     <build
-        timestamp="506257730121932"
+        timestamp="590078870851659"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="F:\Expr\plateocr\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="590108295601126"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="F:\Expr\plateocr\app\build\intermediates\builds\debug\590108295601126\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="590168328362078"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="F:\Expr\plateocr\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
+            type="RESOURCES" />
     </build>
 
 </instant-run>

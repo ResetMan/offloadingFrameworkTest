@@ -8,8 +8,4 @@
         <NodeIP>192.168.0.150</NodeIP>
         <NodePort>12346</NodePort>
     </Node>
-    <Node>
-        <NodeIP>192.168.0.110</NodeIP>
-        <NodePort>12347</NodePort>
-    </Node>
 </Nodes>
