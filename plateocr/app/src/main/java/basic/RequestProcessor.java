@@ -31,6 +31,7 @@ public class RequestProcessor implements Runnable {
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 			Map requestMap = (Map) objectInputStream.readObject(); // 获取请求
 			String handlerType = (String) requestMap.get("handlerType"); // 判断请求类型
+			System.out.println("handlerType:" + handlerType);
 			Handleable handler = HandlerGenerator.getHandler(handlerType, requestMap); // 请求处理生成器生成对应的请求处理对象
 			Map resultMap = handler.handle(); // 请求处理对象处理请求
 			objectOutputStream.writeObject(resultMap); // 返回请求处理的结果

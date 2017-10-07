@@ -1,6 +1,10 @@
 <?xml version = "1.0" encoding = "UTF-8" ?>
 <Nodes>
     <Node>
+        <NodeIP>192.168.0.116</NodeIP>
+        <NodePort>12345</NodePort>
+    </Node>
+    <Node>
         <NodeIP>192.168.0.123</NodeIP>
         <NodePort>12345</NodePort>
     </Node>

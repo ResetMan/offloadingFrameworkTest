@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import org.xjhtxx.pojecker.plateocr.R;
 
 import basic.ObjectFactory;
+import basic.Utils;
 
 
 public class PlateocrActivity extends Activity {
@@ -24,7 +25,7 @@ public class PlateocrActivity extends Activity {
 	private byte[] curbitmapbs = null;
 	private byte[][] bitmapsbs = null;
 
-	private String[] Ips = {"192.168.0.123", "192.168.0.150"};
+	private String[] Ips = {Utils.selfIP, "192.168.0.123"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,14 +82,15 @@ public class PlateocrActivity extends Activity {
 								//System.out.println("data1 : >>>>>>>>>>>>>>>>>" + bitmapbs.length);
 								curbitmapbs = task1.task1(bitmapbs);
 								System.out.println("task1 run in " + Ips[k] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
+								//System.out.println("AlreadyChecked: >>>>>>>>>>>>>>>>" + PlateNumberGroup.AlreadyChecked);
 								if (PlateNumberGroup.AlreadyChecked) {
 									start = System.currentTimeMillis();
-									Task2Intf task2 = (Task2Intf) ObjectFactory.create(Ips[j], Task2.class);
+									Task2Intf task2 = (Task2Intf) ObjectFactory.create(Utils.selfIP, Task2.class);
 									//	System.out.println("data2 : >>>>>>>>>>>>>>>>>" + curbitmapbs.length);
 									bitmapsbs = task2.task2(curbitmapbs);
 									System.out.println("task2 run in " + Ips[j] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
 								}
-
+								//System.out.println("AlreadyChecked: >>>>>>>>>>>>>>>>" + PlateNumberGroup.AlreadyChecked);
 								if (PlateNumberGroup.AlreadyChecked) {
 									AssetsResource.context = PlateocrActivity.this;
 //					String cph = RecEachCharInMinDis.Math(bitmapsbs);
@@ -104,7 +106,7 @@ public class PlateocrActivity extends Activity {
 									System.out.println("task3 run in " + Ips[t] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
 									editP.setText(cph);
 								}
-								System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次结束------------------------------------");
+								System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次结束车牌:"+cph+"------------------------------------");
 							}
 						}
 					}

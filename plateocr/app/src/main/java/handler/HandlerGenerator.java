@@ -23,7 +23,7 @@ public class HandlerGenerator {
 	public static Handleable getHandler(String type, Map requestMap) {
 		Handleable handler = null;
 		try {
-			Class clazz = Class.forName("Handler." + type); // 获取对应请求处理类的类类型
+			Class clazz = Class.forName("handler." + type); // 获取对应请求处理类的类类型
 			Constructor<?> constructor = clazz.getDeclaredConstructor(Map.class); // 得到请求处理类的构造器
 			handler = (Handleable) constructor.newInstance(requestMap); // 生成对应的请求处理类
 		} catch (ClassNotFoundException e) {

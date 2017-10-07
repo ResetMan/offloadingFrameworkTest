@@ -82,15 +82,15 @@ public class RemoteInvokeHandler extends Handler implements Handleable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if (ObjectFactory.PROXY_ID_MAP.containsKey(result)) { // 判断返回结果是否是一个Proxy对象
-					String resultID = ObjectFactory.PROXY_ID_MAP.get(result);
-					String resultLoc = ObjectFactory.ID_LOC_MAP.get(objectID);
-					Object resultCopy = ObjectFactory.ID_OBJ_MAP.get(resultID);
-					PlaceHolder placeHolder = new PlaceHolder(resultCopy, resultID, resultLoc);
-					result = placeHolder; // 将Proxy对象包装成PlaceHolder
-				}
-				resultMap.put("result", result);
 			}
+			if (ObjectFactory.PROXY_ID_MAP.containsKey(result)) { // 判断返回结果是否是一个Proxy对象
+				String resultID = ObjectFactory.PROXY_ID_MAP.get(result);
+				String resultLoc = ObjectFactory.ID_LOC_MAP.get(objectID);
+				Object resultCopy = ObjectFactory.ID_OBJ_MAP.get(resultID);
+				PlaceHolder placeHolder = new PlaceHolder(resultCopy, resultID, resultLoc);
+				result = placeHolder; // 将Proxy对象包装成PlaceHolder
+			}
+			resultMap.put("result", result);
 		} else { // 如果当前节点是个中间转发的
 			Socket temp = null;
 			if ((temp = Utils.getSocket(Loc)).isConnected()) { // 获取自身节点存储的对象位置Loc

@@ -33,7 +33,6 @@ public class RemoteCreateHandler extends Handler implements Handleable {
 		Object remoteObject = null;
 		Object remoteProxy = null;
 		String srcIP = (String) requestMap.get("srcIP"); // 发起创建对象的IP 用来作为后面对象ID生成的一个变量 这边可以看成是Mobile
-
 		if (requestMap.containsKey("sendParams")) { // 如果有参创建
 			Object[] params = (Object[]) requestMap.get("sendParams"); // 处理参数 也是PlaceHolder->Proxy
 			int paramLength = params.length;
