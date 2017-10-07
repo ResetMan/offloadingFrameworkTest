@@ -24,7 +24,7 @@ public class PlateocrActivity extends Activity {
 	private byte[] curbitmapbs = null;
 	private byte[][] bitmapsbs = null;
 
-	private String[] Ips = {"192.168.0.150", "192.168.0.150"};
+	private String[] Ips = {"192.168.0.123", "192.168.0.150"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,59 +54,65 @@ public class PlateocrActivity extends Activity {
 //		bitmapbs = Tools.Bitmap2Bytes(bitmap);
 //		curbitmapbs = Tools.Bitmap2Bytes(curbitmap);
 
-		for (int m = 1; m <= 19; m++) {
-			System.out.println("###########################第" + m + "张#####################################");
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.inPreferredConfig = Config.ARGB_8888;
-			Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/xjhxcp/" + m + ".jpg", options);
-			imageView1.setImageBitmap(bitmap);
-			String cph = "";
-			for (int k = 0; k < 2; k++) {
-				for (int j = 0; j < 2; j++) {
-					for (int t = 0; t < 2; t++) {
+		Button button3 = (Button)findViewById(R.id.button3);
+		button3.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				for (int m = 1; m <= 19; m++) {
+					System.out.println("###########################第" + m + "张#####################################");
+					BitmapFactory.Options options = new BitmapFactory.Options();
+					options.inPreferredConfig = Config.ARGB_8888;
+					Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/xjhxcp/" + m + ".jpg", options);
+					imageView1.setImageBitmap(bitmap);
+					String cph = "";
+					for (int k = 0; k < 2; k++) {
+						for (int j = 0; j < 2; j++) {
+							for (int t = 0; t < 2; t++) {
 
-						System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次------------------------------------");
-						Bitmap curbitmap = bitmap;
+								System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次------------------------------------");
+								Bitmap curbitmap = bitmap;
 
-						bitmapbs = Tools.Bitmap2Bytes(bitmap);
-						curbitmapbs = Tools.Bitmap2Bytes(curbitmap);
+								bitmapbs = Tools.Bitmap2Bytes(bitmap);
+								curbitmapbs = Tools.Bitmap2Bytes(curbitmap);
 
-						imageView1.setImageBitmap(bitmap);
+								imageView1.setImageBitmap(bitmap);
 
-						long start = System.currentTimeMillis();
-						Task1Intf task1 = (Task1Intf) ObjectFactory.create(Ips[k], Task1.class);
-						//System.out.println("data1 : >>>>>>>>>>>>>>>>>" + bitmapbs.length);
-						curbitmapbs = task1.task1(bitmapbs);
-						System.out.println("task1 run in " + Ips[k] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
-						if (PlateNumberGroup.AlreadyChecked) {
-							start = System.currentTimeMillis();
-							Task2Intf task2 = (Task2Intf) ObjectFactory.create(Ips[j], Task2.class);
-							//	System.out.println("data2 : >>>>>>>>>>>>>>>>>" + curbitmapbs.length);
-							bitmapsbs = task2.task2(curbitmapbs);
-							System.out.println("task2 run in " + Ips[j] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
-						}
+								long start = System.currentTimeMillis();
+								Task1Intf task1 = (Task1Intf) ObjectFactory.create(Ips[k], Task1.class);
+								//System.out.println("data1 : >>>>>>>>>>>>>>>>>" + bitmapbs.length);
+								curbitmapbs = task1.task1(bitmapbs);
+								System.out.println("task1 run in " + Ips[k] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
+								if (PlateNumberGroup.AlreadyChecked) {
+									start = System.currentTimeMillis();
+									Task2Intf task2 = (Task2Intf) ObjectFactory.create(Ips[j], Task2.class);
+									//	System.out.println("data2 : >>>>>>>>>>>>>>>>>" + curbitmapbs.length);
+									bitmapsbs = task2.task2(curbitmapbs);
+									System.out.println("task2 run in " + Ips[j] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
+								}
 
-						if (PlateNumberGroup.AlreadyChecked) {
-							AssetsResource.context = PlateocrActivity.this;
+								if (PlateNumberGroup.AlreadyChecked) {
+									AssetsResource.context = PlateocrActivity.this;
 //					String cph = RecEachCharInMinDis.Math(bitmapsbs);
-							int totalLength = 0;
-							for (int i = 0; i < bitmapsbs.length; i++) {
-								totalLength += bitmapsbs[i].length;
-							}
-							start = System.currentTimeMillis();
-							//System.out.println("data3 : >>>>>>>>>>>>>>>>>" + totalLength);
-							Task3Intf task3 = (Task3Intf) ObjectFactory.create(Ips[t], Task3.class);
+									int totalLength = 0;
+									for (int i = 0; i < bitmapsbs.length; i++) {
+										totalLength += bitmapsbs[i].length;
+									}
+									start = System.currentTimeMillis();
+									//System.out.println("data3 : >>>>>>>>>>>>>>>>>" + totalLength);
+									Task3Intf task3 = (Task3Intf) ObjectFactory.create(Ips[t], Task3.class);
 
-							cph = task3.task3(bitmapsbs);
-							System.out.println("task3 run in " + Ips[t] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
-							editP.setText(cph);
+									cph = task3.task3(bitmapsbs);
+									System.out.println("task3 run in " + Ips[t] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
+									editP.setText(cph);
+								}
+								System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次结束------------------------------------");
+							}
 						}
-						System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次结束------------------------------------");
 					}
+					System.out.println("###########################第" + m + "张结束:车牌号"+cph+"#####################################");
 				}
 			}
-			System.out.println("###########################第" + m + "张结束:车牌号"+cph+"#####################################");
-		}
+		});
+
 	}
 
         //
