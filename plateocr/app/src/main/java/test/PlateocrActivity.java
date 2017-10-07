@@ -25,7 +25,9 @@ public class PlateocrActivity extends Activity {
 	private byte[] curbitmapbs = null;
 	private byte[][] bitmapsbs = null;
 
-	private String[] Ips = {Utils.selfIP, "192.168.0.150"};
+	private final static String EdgeIP = "";
+	private final static String CloudIP = "";
+	private String[] Ips = {Utils.selfIP, EdgeIP, CloudIP};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,9 +67,10 @@ public class PlateocrActivity extends Activity {
 					Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/xjhxcp/" + m + ".jpg", options);
 					imageView1.setImageBitmap(bitmap);
 					String cph = "";
-					for (int k = 0; k < 2; k++) {
-						for (int j = 0; j < 2; j++) {
-							for (int t = 0; t < 2; t++) {
+					int length = Ips.length;
+					for (int k = 0; k < length; k++) {
+						for (int j = 0; j < length; j++) {
+							for (int t = 0; t < length; t++) {
 
 								System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次------------------------------------");
 								Bitmap curbitmap = bitmap;
