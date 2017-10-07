@@ -25,7 +25,7 @@ public class PlateocrActivity extends Activity {
 	private byte[] curbitmapbs = null;
 	private byte[][] bitmapsbs = null;
 
-	private String[] Ips = {Utils.selfIP, "192.168.0.123"};
+	private String[] Ips = {Utils.selfIP, "192.168.0.150"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
