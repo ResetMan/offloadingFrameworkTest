@@ -279,10 +279,12 @@ public class ObjectFactory {
 			Thread ttrt = new Thread(ttr);
 			ttrt.start();
 			try {
-				ttrt.join();
+				ttrt.join(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("转发迁移超时");
+
 			}
 			Map offloadToRemoteResult = ttr.getResult(); // 获取转发迁移请求的结果
 			if (offloadToRemoteResult.containsKey("transmitState")) {
@@ -316,10 +318,12 @@ public class ObjectFactory {
 			Thread ofrt = new Thread(ofr);
 			ofrt.start();
 			try {
-				ofrt.join();
+				ofrt.join(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("迁回本地超时");
+				return proxy;
 			}
 			Map offloadFromRemoteResult = ofr.getResult();// 获取迁回请求的结果
 			if (offloadFromRemoteResult.containsKey("backState")) {
