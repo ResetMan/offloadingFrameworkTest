@@ -54,16 +54,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PlateocrActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlateocrActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/test/PlateocrActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2280">
+            <state relative-caret-position="-2223">
               <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2116#5044#0" expanded="true" />
                 <element signature="e#5043#5044#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectFactory.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/basic/ObjectFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="95" column="16" selection-start-line="95" selection-start-column="16" selection-end-line="97" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,16 +143,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="209">
               <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Oritenation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/test/Oritenation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="101" column="44" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -1701,7 +1701,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/test/AssetsResource.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/handler/OffloadToRemoteHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/handler/TransmitToRemoteHandler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/basic/ObjectFactory.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/handler/OffloadFromRemoteHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/basic/EndPoint.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/basic/PlaceHolder.java" />
@@ -1718,6 +1717,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/handler/RemoteInvokeHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/handler/RemoteCreateHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/test/PlateocrActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/basic/ObjectFactory.java" />
       </list>
     </option>
   </component>
@@ -2546,14 +2546,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/basic/ObjectFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="302" column="60" selection-start-line="302" selection-start-column="60" selection-end-line="302" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/handler/OffloadToRemoteHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -2843,13 +2835,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/test/PlateocrActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2280">
+        <state relative-caret-position="-2223">
           <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2116#5044#0" expanded="true" />
             <element signature="e#5043#5044#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/basic/ObjectFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="95" column="16" selection-start-line="95" selection-start-column="16" selection-end-line="97" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

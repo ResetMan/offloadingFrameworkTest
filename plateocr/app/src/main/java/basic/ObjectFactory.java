@@ -90,9 +90,12 @@ public class ObjectFactory {
 			Thread rct = new Thread(remoteCreate);
 			rct.start();
 			try {
-				rct.join();
+				rct.join(2000);
 			} catch (Exception e) {
 				// TODO: handle exception
+				System.out.println();
+				localProxy = ObjectFactory.localCreate(clazz, params);
+				return localProxy;
 			}
 
 			Map remoteCreateResult = remoteCreate.getResult();// 获取远程创建的结果
