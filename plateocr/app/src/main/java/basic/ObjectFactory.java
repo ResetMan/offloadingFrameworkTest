@@ -93,7 +93,7 @@ public class ObjectFactory {
 				rct.join(2000);
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println();
+				System.out.println("远程创建超时，开始本地创建");
 				localProxy = ObjectFactory.localCreate(clazz, params);
 				return localProxy;
 			}
