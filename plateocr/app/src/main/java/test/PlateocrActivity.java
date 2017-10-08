@@ -58,7 +58,7 @@ public class PlateocrActivity extends Activity {
 //		curbitmapbs = Tools.Bitmap2Bytes(curbitmap);
 
 		if(Utils.selfIP.equals("192.168.0.123")) {
-				 for(int m = 1; m <= 19; m ++){
+				 for(int m = 1; m <= 5; m ++){
 					System.out.println("###########################第" + m + "张#####################################");
 					BitmapFactory.Options options = new BitmapFactory.Options();
 					options.inPreferredConfig = Config.ARGB_8888;

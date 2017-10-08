@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Oct 08 12:24:09 CST 2017
+#Sun Oct 08 13:21:38 CST 2017
 60.set=ASSET
 52.set=ASSET
 53.base=F\:\\Expr\\offloadingFrameworkTest\\plateocr\\app\\build\\intermediates\\assets\\debug

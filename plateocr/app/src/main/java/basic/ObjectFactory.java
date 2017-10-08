@@ -121,7 +121,7 @@ public class ObjectFactory {
 				String objectID = (String) remoteCreateResult.get("objectID");// 获取远程创建对象的ID
 				Object copy = remoteCreateResult.get("copy");// 获取远程创建对象的副本
 				if(copy != null) {
-					System.out.println("objectID = " + objectID + " copy:" + copy.getClass().toString());
+					//System.out.println("objectID = " + objectID + " copy:" + copy.getClass().toString());
 					localProxy = ProxyFactory.getProxy(copy, objectID); // 生成代理对象
 					// 存入信息
 					ID_OBJ_MAP.put(objectID, copy);
@@ -129,11 +129,11 @@ public class ObjectFactory {
 					ID_PROXY_MAP.put(objectID, localProxy);
 					PROXY_ID_MAP.put(localProxy, objectID);
 				} else {
-					System.out.println("copy is null");
+					//System.out.println("copy is null");
 					localProxy = localCreate(clazz, params);
 				}
 			} else {
-				System.out.println("remoteCreateResult is null");
+				//System.out.println("remoteCreateResult is null");
 				localProxy = localCreate(clazz, params);
 			}
 		} else {// 如果不能连接 则进行本地创建
@@ -338,6 +338,7 @@ public class ObjectFactory {
 			} catch (TimeoutException e) {
 				e.printStackTrace();
 				System.out.println("转发迁移超时");
+				return;
 			}
 			if (offloadToRemoteResult.containsKey("transmitState")) {
 				ObjectFactory.SUP_ID_LOC_MAP.put(objectID, dest);// 转发迁移成功 则在本地的后备LOC更新信息

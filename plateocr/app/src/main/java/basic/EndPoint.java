@@ -183,7 +183,7 @@ public class EndPoint implements InvocationHandler {
 					result = resultMap.get("result");// 获取远程调用的结果
 					// 结果的处理 同上
 					if (result == null) {
-                        System.out.println("result is null");
+                        //System.out.println("result is null");
                     } else {
 						if (result.getClass() == PlaceHolder.class) {
 							PlaceHolder placeHolder = PlaceHolder.class.cast(result);
@@ -255,7 +255,7 @@ public class EndPoint implements InvocationHandler {
 						result = resultMap.get("result");
 						// 结果的处理
 						if (result == null) {
-                            System.out.println("result is null");
+                            //System.out.println("result is null");
                         } else {
 							if (result.getClass() == PlaceHolder.class) {
 								PlaceHolder placeHolder = PlaceHolder.class.cast(result);
@@ -342,7 +342,7 @@ public class EndPoint implements InvocationHandler {
 						}
 						result = resultMap.get("result");
 						if (result == null) {
-                            System.out.println("result is null");
+                            //System.out.println("result is null");
                         } else {
 							if (result.getClass() == PlaceHolder.class) {
 								PlaceHolder placeHolder = PlaceHolder.class.cast(result);
@@ -356,7 +356,7 @@ public class EndPoint implements InvocationHandler {
 		}
 		//System.out.println("result type = " + result.getClass().toString());
 		if(result != null) {
-			System.out.println("result type = " + result.getClass().toString());
+			//System.out.println("result type = " + result.getClass().toString());
 		}
 		return result;
 	}
