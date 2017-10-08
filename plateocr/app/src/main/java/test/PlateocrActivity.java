@@ -25,8 +25,8 @@ public class PlateocrActivity extends Activity {
 	private byte[] curbitmapbs = null;
 	private byte[][] bitmapsbs = null;
 
-	private final static String EdgeIP = "";
-	private final static String CloudIP = "";
+	private final static String EdgeIP = "192.168.0.152";
+	private final static String CloudIP = "192.168.0.150";
 	private String[] Ips = {Utils.selfIP, EdgeIP, CloudIP};
 
 	@Override
@@ -72,7 +72,7 @@ public class PlateocrActivity extends Activity {
 						for (int j = 0; j < length; j++) {
 							for (int t = 0; t < length; t++) {
 
-								System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次------------------------------------");
+								System.out.println("---------------------第" + (k * length * length + j * length + t) + "次------------------------------------");
 								Bitmap curbitmap = bitmap;
 
 								bitmapbs = Tools.Bitmap2Bytes(bitmap);
@@ -91,7 +91,7 @@ public class PlateocrActivity extends Activity {
 									Task2Intf task2 = (Task2Intf) ObjectFactory.create(Utils.selfIP, Task2.class);
 									//	System.out.println("data2 : >>>>>>>>>>>>>>>>>" + curbitmapbs.length);
 									bitmapsbs = task2.task2(curbitmapbs);
-									System.out.println("task2 run in " + Ips[j] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
+									System.out.println("task2 run in " + Utils.selfIP + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
 								}
 								//System.out.println("AlreadyChecked: >>>>>>>>>>>>>>>>" + PlateNumberGroup.AlreadyChecked);
 								if (PlateNumberGroup.AlreadyChecked) {
@@ -109,7 +109,7 @@ public class PlateocrActivity extends Activity {
 									System.out.println("task3 run in " + Ips[t] + ": >>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - start) * 2);
 									editP.setText(cph);
 								}
-								System.out.println("---------------------第" + (k * 4 + j * 2 + t) + "次结束车牌:"+cph+"------------------------------------");
+								System.out.println("---------------------第" + (k * length * length + j * length + t) + "次结束车牌:"+cph+"------------------------------------");
 							}
 						}
 					}
