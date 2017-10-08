@@ -213,10 +213,12 @@ public class ObjectFactory {
 			Thread otrt = new Thread(otr);
 			otrt.start();
 			try {
-				otrt.join();
+				otrt.join(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("迁移到远程超时");
+				return proxy;
+				//e.printStackTrace();
 			}
 			Map offloadToRemoteResult = otr.getResult(); // 获取对象迁移的结果
 			if (offloadToRemoteResult.containsKey("offloadState")) {
