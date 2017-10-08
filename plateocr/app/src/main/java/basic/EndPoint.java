@@ -71,9 +71,19 @@ public class EndPoint implements InvocationHandler {
 				Thread rit = new Thread(ri);
 				rit.start();
 				try {
-					rit.join();
+					rit.join(10000);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
+					System.out.println("远程调用超时 开始本地副本调用");
+					Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+					try {
+						result = method.invoke(localObject, args); // 完成对象调用
+					} catch (IllegalAccessException iae) {
+						iae.printStackTrace();
+					} catch (InvocationTargetException ite) {
+						ite.printStackTrace();
+					}
+					return result;
 				}
 				Map resultMap = ri.getResult();
 				result = resultMap.get("result");// 获取远程调用的结果
@@ -110,9 +120,18 @@ public class EndPoint implements InvocationHandler {
 					Thread rit = new Thread(ri);
 					rit.start();
 					try {
-						rit.join();
+						rit.join(10000);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						System.out.println("备用节点远程调用超时 开始本地副本调用");
+						Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+						try {
+							result = method.invoke(localObject, args); // 完成对象调用
+						} catch (IllegalAccessException iae) {
+							iae.printStackTrace();
+						} catch (InvocationTargetException ite) {
+							ite.printStackTrace();
+						}
+						return result;
 					}
 					Map resultMap = ri.getResult();
 					result = resultMap.get("result");// 获取远程调用的结果
@@ -151,9 +170,19 @@ public class EndPoint implements InvocationHandler {
 						Thread tit = new Thread(ti);
 						tit.start();
 						try {
-							tit.join();
+							tit.join(10000);
 						} catch (InterruptedException e) {
-							e.printStackTrace();
+//							e.printStackTrace();
+							System.out.println("转发调用超时 开始本地副本调用");
+							//localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+							try {
+								result = method.invoke(localObject, args); // 完成对象调用
+							} catch (IllegalAccessException iae) {
+								iae.printStackTrace();
+							} catch (InvocationTargetException ite) {
+								ite.printStackTrace();
+							}
+							return result;
 						}
 						Map resultMap = ti.getResult();// 获取转发调用请求
 						result = resultMap.get("result");
@@ -207,9 +236,19 @@ public class EndPoint implements InvocationHandler {
 						Thread tit = new Thread(ti);
 						tit.start();
 						try {
-							tit.join();
+							tit.join(10000);
 						} catch (InterruptedException e) {
-							e.printStackTrace();
+							//e.printStackTrace();
+							System.out.println("转发调用超时 开始本地副本调用");
+							//Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+							try {
+								result = method.invoke(localObject, args); // 完成对象调用
+							} catch (IllegalAccessException iae) {
+								iae.printStackTrace();
+							} catch (InvocationTargetException ite) {
+								ite.printStackTrace();
+							}
+							return result;
 						}
 						Map resultMap = ti.getResult();
 						result = resultMap.get("result");
