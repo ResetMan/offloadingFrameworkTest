@@ -6,5 +6,9 @@
     {
         "merged": "F:\\Expr\\plateocr\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
         "source": "F:\\Expr\\plateocr\\app\\src\\main\\res\\layout\\main.xml"
+    },
+    {
+        "merged": "F:\\Expr\\offloadingFrameworkTest\\plateocr\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
+        "source": "F:\\Expr\\offloadingFrameworkTest\\plateocr\\app\\src\\main\\res\\layout\\main.xml"
     }
 ]

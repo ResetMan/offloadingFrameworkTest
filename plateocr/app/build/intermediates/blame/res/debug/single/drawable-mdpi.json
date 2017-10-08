@@ -6,5 +6,9 @@
     {
         "merged": "F:\\Experience\\plateocr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
         "source": "F:\\Experience\\plateocr\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "F:\\Expr\\offloadingFrameworkTest\\plateocr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
+        "source": "F:\\Expr\\offloadingFrameworkTest\\plateocr\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     }
 ]

@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * Request 请求类
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author csh
  *
  */
-public class Request implements Runnable, Requestable {
+public class Request implements Callable<Map>, Requestable {
 
 	protected Socket socket;
 	protected Map requestMap;
@@ -52,9 +53,10 @@ public class Request implements Runnable, Requestable {
 	}
 
 	@Override
-	public void run() {
+	public Map call() {
 		// TODO Auto-generated method stub
 		doRequest();
+		return getResult();
 	}
 
 }

@@ -6,6 +6,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import request.Request;
 
@@ -87,28 +92,50 @@ public class ObjectFactory {
 			}
 
 			Request remoteCreate = new Request(temp, remoteCreateMap);// 开启远程创建请求
-			Thread rct = new Thread(remoteCreate);
+			FutureTask<Map> futureTask = new FutureTask(remoteCreate);
+			Thread rct = new Thread(futureTask);
 			rct.start();
+//			try {
+//				rct.join(2000);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//				e.printStackTrace();
+//				System.out.println("远程创建超时，开始本地创建");
+//				localProxy = ObjectFactory.localCreate(clazz, params);
+//				return localProxy;
+//			}
+			Map remoteCreateResult = null;
 			try {
-				rct.join(2000);
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println("远程创建超时，开始本地创建");
-				localProxy = ObjectFactory.localCreate(clazz, params);
+				remoteCreateResult = futureTask.get(2, TimeUnit.SECONDS);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (TimeoutException e) {
+//				e.printStackTrace();
+				System.out.println("远程创建超时");
+				localProxy = localCreate(clazz, params);
 				return localProxy;
 			}
-
-			Map remoteCreateResult = remoteCreate.getResult();// 获取远程创建的结果
-			String objectID = (String) remoteCreateResult.get("objectID");// 获取远程创建对象的ID
-			Object copy = remoteCreateResult.get("copy");// 获取远程创建对象的副本
-
-			localProxy = ProxyFactory.getProxy(copy, objectID); // 生成代理对象
-			// 存入信息
-			ID_OBJ_MAP.put(objectID, copy);
-			ID_LOC_MAP.put(objectID, loc);
-			ID_PROXY_MAP.put(objectID, localProxy);
-			PROXY_ID_MAP.put(localProxy, objectID);
-
+			if(remoteCreateResult != null) {
+				String objectID = (String) remoteCreateResult.get("objectID");// 获取远程创建对象的ID
+				Object copy = remoteCreateResult.get("copy");// 获取远程创建对象的副本
+				if(copy != null) {
+					System.out.println("objectID = " + objectID + " copy:" + copy.getClass().toString());
+					localProxy = ProxyFactory.getProxy(copy, objectID); // 生成代理对象
+					// 存入信息
+					ID_OBJ_MAP.put(objectID, copy);
+					ID_LOC_MAP.put(objectID, loc);
+					ID_PROXY_MAP.put(objectID, localProxy);
+					PROXY_ID_MAP.put(localProxy, objectID);
+				} else {
+					System.out.println("copy is null");
+					localProxy = localCreate(clazz, params);
+				}
+			} else {
+				System.out.println("remoteCreateResult is null");
+				localProxy = localCreate(clazz, params);
+			}
 		} else {// 如果不能连接 则进行本地创建
 			localProxy = localCreate(clazz, params);
 		}
@@ -210,17 +237,29 @@ public class ObjectFactory {
 			offloadToRemoteMap.put("fieldVars", fieldVars);// 存入处理之后的成员属性
 			offloadToRemoteMap.put("copy", localObject);// 存入对象副本
 			Request otr = new Request(temp, offloadToRemoteMap); // 开启对象迁移到远程的请求
-			Thread otrt = new Thread(otr);
+			FutureTask<Map> futureTask = new FutureTask(otr);
+			Thread otrt = new Thread(futureTask);
 			otrt.start();
+//			try {
+//				otrt.join(2000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				System.out.println("迁移到远程超时");
+//				return proxy;
+//				//e.printStackTrace();
+//			}
+			//Map offloadToRemoteResult = otr.getResult(); // 获取对象迁移的结果
+			Map offloadToRemoteResult = null;
 			try {
-				otrt.join(2000);
+				offloadToRemoteResult = futureTask.get(2, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (TimeoutException e) {
+				e.printStackTrace();
 				System.out.println("迁移到远程超时");
-				return proxy;
-				//e.printStackTrace();
 			}
-			Map offloadToRemoteResult = otr.getResult(); // 获取对象迁移的结果
 			if (offloadToRemoteResult.containsKey("offloadState")) {
 				ObjectFactory.ID_LOC_MAP.put(objectID, dest);// 迁移成功
 			} else {
@@ -276,17 +315,30 @@ public class ObjectFactory {
 			transmitToRemoteMap.put("copy", localObject);// 存入对象的副本
 			transmitToRemoteMap.put("Loc", Loc);
 			Request ttr = new Request(temp, transmitToRemoteMap);// 开启转发迁移请求
-			Thread ttrt = new Thread(ttr);
+			FutureTask<Map> futureTask = new FutureTask<Map>(ttr);
+			Thread ttrt = new Thread(futureTask);
 			ttrt.start();
-			try {
-				ttrt.join(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				System.out.println("转发迁移超时");
+//			try {
+//				ttrt.join(2000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				//e.printStackTrace();
+//				System.out.println("转发迁移超时");
+//
+//			}
+			//Map offloadToRemoteResult = ttr.getResult(); // 获取转发迁移请求的结果
 
+			Map offloadToRemoteResult = null;
+			try {
+				offloadToRemoteResult = futureTask.get(2, TimeUnit.SECONDS);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (TimeoutException e) {
+				e.printStackTrace();
+				System.out.println("转发迁移超时");
 			}
-			Map offloadToRemoteResult = ttr.getResult(); // 获取转发迁移请求的结果
 			if (offloadToRemoteResult.containsKey("transmitState")) {
 				ObjectFactory.SUP_ID_LOC_MAP.put(objectID, dest);// 转发迁移成功 则在本地的后备LOC更新信息
 			} else {
@@ -315,17 +367,31 @@ public class ObjectFactory {
 			offloadFromRemote.put("objectID", objectID);// 存入对象ID
 			offloadFromRemote.put("srcIP", Utils.selfIP);// 存入srcIP
 			Request ofr = new Request(temp, offloadFromRemote);// 开启迁回请求
-			Thread ofrt = new Thread(ofr);
+			FutureTask<Map> futureTask = new FutureTask<Map>(ofr);
+			Thread ofrt = new Thread(futureTask);
 			ofrt.start();
+//			try {
+//				ofrt.join(2000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				//e.printStackTrace();
+//				System.out.println("迁回本地超时");
+//				return proxy;
+//			}
+
+			//Map offloadFromRemoteResult = ofr.getResult();// 获取迁回请求的结果
+			Map offloadFromRemoteResult = null;
 			try {
-				ofrt.join(2000);
+				offloadFromRemoteResult = futureTask.get(2, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (TimeoutException e) {
+				e.printStackTrace();
 				System.out.println("迁回本地超时");
 				return proxy;
 			}
-			Map offloadFromRemoteResult = ofr.getResult();// 获取迁回请求的结果
 			if (offloadFromRemoteResult.containsKey("backState")) {
 				System.out.println("back success");
 			} else {

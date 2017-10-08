@@ -1,15 +1,15 @@
 <?xml version = "1.0" encoding = "UTF-8" ?>
 <Nodes>
     <Node>
-        <NodeIP>192.168.0.116</NodeIP>
+        <NodeIP>192.168.0.123</NodeIP> <!-- 三星 -->
         <NodePort>12345</NodePort>
     </Node>
     <Node>
-        <NodeIP>192.168.0.123</NodeIP>
-        <NodePort>12345</NodePort>
-    </Node>
-    <Node>
-        <NodeIP>192.168.0.150</NodeIP>
+        <NodeIP>192.168.0.150</NodeIP> <!-- 平板 -->
         <NodePort>12346</NodePort>
+    </Node>
+    <Node>
+        <NodeIP>192.168.0.152</NodeIP>  <!-- 带壳三星 -->
+        <NodePort>12347</NodePort>
     </Node>
 </Nodes>

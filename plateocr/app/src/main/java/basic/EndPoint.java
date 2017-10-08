@@ -7,6 +7,10 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import request.Request;
 
@@ -68,12 +72,34 @@ public class EndPoint implements InvocationHandler {
 					remoteInvokeMap.put("params", params); // 存入处理好的params
 				}
 				Request ri = new Request(temp, remoteInvokeMap);// 远程调用请求开始运行
-				Thread rit = new Thread(ri);
+				FutureTask<Map> futureTask = new FutureTask<Map>(ri);
+				Thread rit = new Thread(futureTask);
 				rit.start();
+//				try {
+//					rit.join(1000);
+//				} catch (Exception e) {
+//					//e.printStackTrace();
+//					System.out.println("远程调用超时 开始本地副本调用");
+//					Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+//					try {
+//						result = method.invoke(localObject, args); // 完成对象调用
+//					} catch (IllegalAccessException iae) {
+//						iae.printStackTrace();
+//					} catch (InvocationTargetException ite) {
+//						ite.printStackTrace();
+//					}
+//					return result;
+//				}
+				//Map resultMap = ri.getResult();
+				Map resultMap = null;
 				try {
-					rit.join(10000);
+					resultMap = futureTask.get(5, TimeUnit.SECONDS);
 				} catch (InterruptedException e) {
-					//e.printStackTrace();
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				} catch (TimeoutException e) {
+					e.printStackTrace();
 					System.out.println("远程调用超时 开始本地副本调用");
 					Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
 					try {
@@ -85,11 +111,10 @@ public class EndPoint implements InvocationHandler {
 					}
 					return result;
 				}
-				Map resultMap = ri.getResult();
 				result = resultMap.get("result");// 获取远程调用的结果
 				if (result == null) {
-
-				} else {
+                    System.out.println("result is null ");
+                } else {
 					if (result.getClass() == PlaceHolder.class) {// 如果远程调用结果是PlaceHolder，则其真实对象应该是Proxy对象
 						PlaceHolder placeHolder = PlaceHolder.class.cast(result);
 						result = Utils.placeHolder2proxy(placeHolder);// 将PlaceHolder转成Proxy
@@ -117,11 +142,33 @@ public class EndPoint implements InvocationHandler {
 						remoteInvokeMap.put("params", params);// 存入调用参数
 					}
 					Request ri = new Request(temp, remoteInvokeMap);// 远程调用请求开始
-					Thread rit = new Thread(ri);
+					FutureTask<Map> futureTask = new FutureTask<Map>(ri);
+					Thread rit = new Thread(futureTask);
 					rit.start();
+//					try {
+//						rit.join(1000);
+//					} catch (Exception e) {
+//						System.out.println("备用节点远程调用超时 开始本地副本调用");
+//						Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+//						try {
+//							result = method.invoke(localObject, args); // 完成对象调用
+//						} catch (IllegalAccessException iae) {
+//							iae.printStackTrace();
+//						} catch (InvocationTargetException ite) {
+//							ite.printStackTrace();
+//						}
+//						return result;
+//					}
+					//Map resultMap = ri.getResult();
+					Map resultMap = null;
 					try {
-						rit.join(10000);
+						resultMap = futureTask.get(5, TimeUnit.SECONDS);
 					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} catch (ExecutionException e) {
+						e.printStackTrace();
+					} catch (TimeoutException e) {
+						e.printStackTrace();
 						System.out.println("备用节点远程调用超时 开始本地副本调用");
 						Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
 						try {
@@ -133,12 +180,11 @@ public class EndPoint implements InvocationHandler {
 						}
 						return result;
 					}
-					Map resultMap = ri.getResult();
 					result = resultMap.get("result");// 获取远程调用的结果
 					// 结果的处理 同上
 					if (result == null) {
-
-					} else {
+                        System.out.println("result is null");
+                    } else {
 						if (result.getClass() == PlaceHolder.class) {
 							PlaceHolder placeHolder = PlaceHolder.class.cast(result);
 							result = Utils.placeHolder2proxy(placeHolder);
@@ -167,14 +213,36 @@ public class EndPoint implements InvocationHandler {
 							transmitInvokeMap.put("params", params);// 存入方法调用参数
 						}
 						Request ti = new Request(temp, transmitInvokeMap);// 转发调用请求开始
-						Thread tit = new Thread(ti);
+						FutureTask<Map> futureTask = new FutureTask<Map>(ti);
+						Thread tit = new Thread(futureTask);
 						tit.start();
+//						try {
+//							tit.join(1000);
+//						} catch (Exception e) {
+////							e.printStackTrace();
+//							System.out.println("转发调用超时 开始本地副本调用");
+//							//localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+//							try {
+//								result = method.invoke(localObject, args); // 完成对象调用
+//							} catch (IllegalAccessException iae) {
+//								iae.printStackTrace();
+//							} catch (InvocationTargetException ite) {
+//								ite.printStackTrace();
+//							}
+//							return result;
+//						}
+						//Map resultMap = ti.getResult();// 获取转发调用请求
+						Map resultMap = null;
 						try {
-							tit.join(10000);
+							resultMap = futureTask.get(5, TimeUnit.SECONDS);
 						} catch (InterruptedException e) {
-//							e.printStackTrace();
+							e.printStackTrace();
+						} catch (ExecutionException e) {
+							e.printStackTrace();
+						} catch (TimeoutException e) {
+							e.printStackTrace();
 							System.out.println("转发调用超时 开始本地副本调用");
-							//localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+							//Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
 							try {
 								result = method.invoke(localObject, args); // 完成对象调用
 							} catch (IllegalAccessException iae) {
@@ -184,12 +252,11 @@ public class EndPoint implements InvocationHandler {
 							}
 							return result;
 						}
-						Map resultMap = ti.getResult();// 获取转发调用请求
 						result = resultMap.get("result");
 						// 结果的处理
 						if (result == null) {
-
-						} else {
+                            System.out.println("result is null");
+                        } else {
 							if (result.getClass() == PlaceHolder.class) {
 								PlaceHolder placeHolder = PlaceHolder.class.cast(result);
 								result = Utils.placeHolder2proxy(placeHolder);
@@ -233,12 +300,35 @@ public class EndPoint implements InvocationHandler {
 							transmitInvokeMap.put("params", params);
 						}
 						Request ti = new Request(temp, transmitInvokeMap);
-						Thread tit = new Thread(ti);
+						FutureTask<Map> futureTask = new FutureTask<Map>(ti);
+						Thread tit = new Thread(futureTask);
 						tit.start();
+//						try {
+//							tit.join(1000);
+//						} catch (Exception e) {
+//							//e.printStackTrace();
+//							System.out.println("转发调用超时 开始本地副本调用");
+//							//Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
+//							try {
+//								result = method.invoke(localObject, args); // 完成对象调用
+//							} catch (IllegalAccessException iae) {
+//								iae.printStackTrace();
+//							} catch (InvocationTargetException ite) {
+//								ite.printStackTrace();
+//							}
+//							return result;
+//						}
+
+						//Map resultMap = ti.getResult();
+						Map resultMap = null;
 						try {
-							tit.join(10000);
+							resultMap = futureTask.get(5, TimeUnit.SECONDS);
 						} catch (InterruptedException e) {
-							//e.printStackTrace();
+							e.printStackTrace();
+						} catch (ExecutionException e) {
+							e.printStackTrace();
+						} catch (TimeoutException e) {
+							e.printStackTrace();
 							System.out.println("转发调用超时 开始本地副本调用");
 							//Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
 							try {
@@ -250,11 +340,10 @@ public class EndPoint implements InvocationHandler {
 							}
 							return result;
 						}
-						Map resultMap = ti.getResult();
 						result = resultMap.get("result");
 						if (result == null) {
-
-						} else {
+                            System.out.println("result is null");
+                        } else {
 							if (result.getClass() == PlaceHolder.class) {
 								PlaceHolder placeHolder = PlaceHolder.class.cast(result);
 								result = Utils.placeHolder2proxy(placeHolder);
@@ -265,7 +354,10 @@ public class EndPoint implements InvocationHandler {
 				}
 			}
 		}
-
+		//System.out.println("result type = " + result.getClass().toString());
+		if(result != null) {
+			System.out.println("result type = " + result.getClass().toString());
+		}
 		return result;
 	}
 

@@ -25,8 +25,8 @@ public class PlateocrActivity extends Activity {
 	private byte[] curbitmapbs = null;
 	private byte[][] bitmapsbs = null;
 
-	private final static String EdgeIP = "192.168.0.152";
-	private final static String CloudIP = "192.168.0.150";
+	private final static String EdgeIP = "192.168.0.150";
+	private final static String CloudIP = "192.168.0.152";
 	private String[] Ips = {Utils.selfIP, EdgeIP, CloudIP};
 
 	@Override
@@ -57,21 +57,19 @@ public class PlateocrActivity extends Activity {
 //		bitmapbs = Tools.Bitmap2Bytes(bitmap);
 //		curbitmapbs = Tools.Bitmap2Bytes(curbitmap);
 
-		Button button3 = (Button)findViewById(R.id.button3);
-		button3.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				for (int m = 1; m <= 19; m++) {
+		if(Utils.selfIP.equals("192.168.0.123")) {
+				 for(int m = 1; m <= 19; m ++){
 					System.out.println("###########################第" + m + "张#####################################");
 					BitmapFactory.Options options = new BitmapFactory.Options();
 					options.inPreferredConfig = Config.ARGB_8888;
 					Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/xjhxcp/" + m + ".jpg", options);
 					imageView1.setImageBitmap(bitmap);
-					String cph = "";
+					 String cph = "";
 					int length = Ips.length;
 					for (int k = 0; k < length; k++) {
 						for (int j = 0; j < length; j++) {
 							for (int t = 0; t < length; t++) {
-
+								cph = "";
 								System.out.println("---------------------第" + (k * length * length + j * length + t) + "次------------------------------------");
 								Bitmap curbitmap = bitmap;
 
@@ -116,7 +114,7 @@ public class PlateocrActivity extends Activity {
 					System.out.println("###########################第" + m + "张结束:车牌号"+cph+"#####################################");
 				}
 			}
-		});
+
 
 	}
 

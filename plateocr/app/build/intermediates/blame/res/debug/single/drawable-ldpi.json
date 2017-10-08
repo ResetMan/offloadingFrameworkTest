@@ -4,6 +4,10 @@
         "source": "F:\\Experience\\plateocr\\app\\src\\main\\res\\drawable-ldpi\\ic_launcher.png"
     },
     {
+        "merged": "F:\\Expr\\offloadingFrameworkTest\\plateocr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\ic_launcher.png",
+        "source": "F:\\Expr\\offloadingFrameworkTest\\plateocr\\app\\src\\main\\res\\drawable-ldpi\\ic_launcher.png"
+    },
+    {
         "merged": "F:\\Expr\\plateocr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\ic_launcher.png",
         "source": "F:\\Expr\\plateocr\\app\\src\\main\\res\\drawable-ldpi\\ic_launcher.png"
     }

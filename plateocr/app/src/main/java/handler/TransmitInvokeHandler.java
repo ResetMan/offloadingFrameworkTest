@@ -2,6 +2,7 @@ package handler;
 
 import java.net.Socket;
 import java.util.Map;
+import java.util.concurrent.FutureTask;
 
 
 import basic.ObjectFactory;
@@ -31,7 +32,8 @@ public class TransmitInvokeHandler extends Handler implements Handleable {
 		if ((temp = Utils.getSocket(Loc)).isConnected()) { // 如果当前节点能够连接上Loc 如Cloud
 			requestMap.put("handlerType", "RemoteInvokeHandler"); // 开始远程调用请求
 			Request remoteInvoke = new Request(temp, requestMap);
-			Thread rit = new Thread(remoteInvoke);
+			FutureTask<Map> futureTask = new FutureTask<Map>(remoteInvoke);
+			Thread rit = new Thread(futureTask);
 			rit.start();
 			try {
 				rit.join();
@@ -46,7 +48,8 @@ public class TransmitInvokeHandler extends Handler implements Handleable {
 				temp = Utils.getSocket(SUPLoc);
 				requestMap.put("handlerType", "RemoteInvokeHandler"); // 开始远程调用请求
 				Request remoteInvoke = new Request(temp, requestMap);
-				Thread rit = new Thread(remoteInvoke);
+				FutureTask<Map> futureTask = new FutureTask<Map>(remoteInvoke);
+				Thread rit = new Thread(futureTask);
 				rit.start();
 				try {
 					rit.join();
@@ -60,7 +63,8 @@ public class TransmitInvokeHandler extends Handler implements Handleable {
 				Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID);
 				ObjectFactory.transmitToRemote(Utils.cloudIP, objectID, localObject);// 转发迁移到Cloud
 				Request transmitInvoke = new Request(temp, requestMap); // 开始转发调用
-				Thread tit = new Thread(transmitInvoke);
+				FutureTask<Map> futureTask = new FutureTask<Map>(transmitInvoke);
+				Thread tit = new Thread(futureTask);
 				tit.start();
 				try {
 					tit.join();

@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.Map;
+import java.util.concurrent.FutureTask;
 
 import basic.ObjectFactory;
 import basic.PlaceHolder;
@@ -95,7 +96,8 @@ public class RemoteInvokeHandler extends Handler implements Handleable {
 			Socket temp = null;
 			if ((temp = Utils.getSocket(Loc)).isConnected()) { // 获取自身节点存储的对象位置Loc
 				Request ri = new Request(temp, requestMap); // 开启远程调用
-				Thread rit = new Thread(ri);
+				FutureTask<Map> futureTask = new FutureTask<Map>(ri);
+				Thread rit = new Thread(futureTask);
 				rit.start();
 				try {
 					rit.join();
