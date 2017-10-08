@@ -1,6 +1,7 @@
 package basic;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class EndPoint implements InvocationHandler {
 	 * 3.后备跳板都没后，开始transmitInvoke{handlerType, objectID, Loc, methodName, params}
      */
 	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+	public Object invoke(Object proxy, Method method, Object[] args){
 		// TODO Auto-generated method stub
 		if (method.getName().equals("hashCode")) { // 拦截hashCode方法
 			return Utils.getHashCode(objectID);
@@ -40,7 +41,13 @@ public class EndPoint implements InvocationHandler {
 		String Loc = ObjectFactory.ID_LOC_MAP.get(objectID); // 获取对象所处的位置
 		if (Loc.equals(Utils.selfIP)) { // 如果是所处位置是本地
 			Object localObject = ObjectFactory.ID_OBJ_MAP.get(objectID); // 获取到本地的对象
-			result = method.invoke(localObject, args); // 完成对象调用
+			try {
+				result = method.invoke(localObject, args); // 完成对象调用
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
 		} else {
 			Socket temp = null;
 			if ((temp = Utils.getSocket(Loc)).isConnected()) { // 如果可以连接到Loc
@@ -63,7 +70,11 @@ public class EndPoint implements InvocationHandler {
 				Request ri = new Request(temp, remoteInvokeMap);// 远程调用请求开始运行
 				Thread rit = new Thread(ri);
 				rit.start();
-				rit.join();
+				try {
+					rit.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				Map resultMap = ri.getResult();
 				result = resultMap.get("result");// 获取远程调用的结果
 				if (result == null) {
@@ -98,7 +109,11 @@ public class EndPoint implements InvocationHandler {
 					Request ri = new Request(temp, remoteInvokeMap);// 远程调用请求开始
 					Thread rit = new Thread(ri);
 					rit.start();
-					rit.join();
+					try {
+						rit.join();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					Map resultMap = ri.getResult();
 					result = resultMap.get("result");// 获取远程调用的结果
 					// 结果的处理 同上
@@ -135,7 +150,11 @@ public class EndPoint implements InvocationHandler {
 						Request ti = new Request(temp, transmitInvokeMap);// 转发调用请求开始
 						Thread tit = new Thread(ti);
 						tit.start();
-						tit.join();
+						try {
+							tit.join();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 						Map resultMap = ti.getResult();// 获取转发调用请求
 						result = resultMap.get("result");
 						// 结果的处理
@@ -187,7 +206,11 @@ public class EndPoint implements InvocationHandler {
 						Request ti = new Request(temp, transmitInvokeMap);
 						Thread tit = new Thread(ti);
 						tit.start();
-						tit.join();
+						try {
+							tit.join();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 						Map resultMap = ti.getResult();
 						result = resultMap.get("result");
 						if (result == null) {
